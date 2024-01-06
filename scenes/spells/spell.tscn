@@ -1,0 +1,61 @@
+[gd_scene load_steps=6 format=3 uid="uid://bfue4apnd6qxo"]
+
+[ext_resource type="Texture2D" uid="uid://btuj2onboaexm" path="res://graphics/swoosh.png" id="1_mrde7"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7e5j8"]
+height = 28.0
+
+[sub_resource type="Animation" id="Animation_gk8li"]
+resource_name = "swoosh"
+length = 1.8
+step = 0.45
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.45, 0.9, 1.35),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_hw1wt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i1lm8"]
+_data = {
+"RESET": SubResource("Animation_hw1wt"),
+"swoosh": SubResource("Animation_gk8li")
+}
+
+[node name="Spell" type="Area2D"]
+collision_layer = 16
+collision_mask = 10
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-6, -2)
+texture = ExtResource("1_mrde7")
+hframes = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_7e5j8")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_i1lm8")
+}

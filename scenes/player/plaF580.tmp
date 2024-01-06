@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://d0y1m0thbe1eq"]
+[gd_scene load_steps=10 format=3 uid="uid://d0y1m0thbe1eq"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_6f851"]
 [ext_resource type="Texture2D" uid="uid://cw208ilamgq5x" path="res://graphics/characters.png" id="1_j8jpu"]
@@ -90,29 +90,10 @@ tracks/0/keys = {
 "values": [14, 15, 16, 17]
 }
 
-[sub_resource type="Animation" id="Animation_npjqh"]
-resource_name = "idle"
-length = 0.9
-loop_mode = 1
-step = 0.45
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.45),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [0, 4]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fusxw"]
 _data = {
 "RESET": SubResource("Animation_p3d3y"),
 "fall": SubResource("Animation_mnwkc"),
-"idle": SubResource("Animation_npjqh"),
 "jump": SubResource("Animation_q4wiv"),
 "run": SubResource("Animation_gbiru"),
 "walk": SubResource("Animation_ac8nv")
@@ -122,16 +103,16 @@ _data = {
 collision_mask = 15
 script = ExtResource("1_6f851")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -0.5)
-shape = SubResource("RectangleShape2D_205l0")
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-1, -2)
 texture = ExtResource("1_j8jpu")
 hframes = 23
 region_enabled = true
 region_rect = Rect2(-0.42432, 38.7249, 736.302, 29.5416)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_205l0")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

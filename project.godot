@@ -11,9 +11,14 @@ config_version=5
 [application]
 
 config/name="2d Platformer"
-run/main_scene="res://scenes/levels/level_1.tscn"
+run/main_scene="res://scenes/levels/level_parent.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
 config/icon="res://graphics/icon.svg"
+
+[display]
+
+window/size/viewport_width=720
+window/size/viewport_height=480
 
 [input]
 
