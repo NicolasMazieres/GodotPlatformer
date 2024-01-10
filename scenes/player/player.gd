@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-signal action_pressed
+signal action_pressed(position: Vector2, flip: bool)
 
 const SPEED = 100.0
 const JUMP_VELOCITY = -175.0
@@ -32,7 +32,7 @@ func _physics_process(delta):
 	
 	# Handle action
 	if Input.is_action_just_pressed("action"):
-		action_pressed.emit()
+		action_pressed.emit($SpellStartPosition.global_position, sprite.flip_h)
 	
 	move_and_slide()
 	update_movement_animations(direction)

@@ -1,60 +1,84 @@
-[gd_scene load_steps=6 format=3 uid="uid://bfue4apnd6qxo"]
+[gd_scene load_steps=8 format=3 uid="uid://bfue4apnd6qxo"]
 
-[ext_resource type="Texture2D" uid="uid://btuj2onboaexm" path="res://graphics/swoosh.png" id="1_mrde7"]
+[ext_resource type="Texture2D" uid="uid://dwqjigsej47ku" path="res://graphics/addons/kenney_particle_pack/fire_01.png" id="1_0jnlh"]
+[ext_resource type="Script" path="res://scenes/spells/spell.gd" id="1_oqbwp"]
+[ext_resource type="Texture2D" uid="uid://c08ebghcd0lw" path="res://graphics/addons/kenney_particle_pack/smoke_01.png" id="2_3fk6q"]
+[ext_resource type="Texture2D" uid="uid://b81yrp84l1ap2" path="res://graphics/addons/kenney_particle_pack/fire_02.png" id="2_5hf33"]
+[ext_resource type="Texture2D" uid="uid://c471odqcpdj1k" path="res://graphics/addons/kenney_particle_pack/smoke_02.png" id="6_xldp2"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7e5j8"]
-height = 28.0
+radius = 7.0
+height = 24.0
 
-[sub_resource type="Animation" id="Animation_hw1wt"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
-[sub_resource type="Animation" id="Animation_gk8li"]
-resource_name = "swoosh"
-step = 0.25
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_i1lm8"]
-_data = {
-"RESET": SubResource("Animation_hw1wt"),
-"swoosh": SubResource("Animation_gk8li")
-}
+[sub_resource type="SpriteFrames" id="SpriteFrames_qk8dx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_0jnlh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_5hf33")
+}],
+"loop": true,
+"name": &"fire",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_3fk6q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_xldp2")
+}],
+"loop": true,
+"name": &"smoke",
+"speed": 5.0
+}]
 
 [node name="Spell" type="Area2D"]
 collision_layer = 16
 collision_mask = 10
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-6, -2)
-texture = ExtResource("1_mrde7")
-hframes = 4
+script = ExtResource("1_oqbwp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
 shape = SubResource("CapsuleShape2D_7e5j8")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_i1lm8")
-}
+[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="."]
+modulate = Color(1, 0.317647, 0.137255, 1)
+scale = Vector2(0.1, 0.05)
+sprite_frames = SubResource("SpriteFrames_qk8dx")
+animation = &"smoke"
+autoplay = "fire"
+frame_progress = 0.545422
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(0.733333, 0.14902, 0.101961, 1)
+scale = Vector2(0.1, 0.05)
+sprite_frames = SubResource("SpriteFrames_qk8dx")
+animation = &"fire"
+autoplay = "fire"
+frame_progress = 0.0635106
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+modulate = Color(0.945098, 0.705882, 0.12549, 1)
+scale = Vector2(0.1, 0.05)
+sprite_frames = SubResource("SpriteFrames_qk8dx")
+animation = &"fire"
+autoplay = "fire"
+frame_progress = 0.787092
+
+[node name="AnimatedSprite2D4" type="AnimatedSprite2D" parent="."]
+modulate = Color(0.780392, 0.117647, 0, 1)
+position = Vector2(9.53674e-07, -2.38419e-07)
+scale = Vector2(0.08, 0.04)
+sprite_frames = SubResource("SpriteFrames_qk8dx")
+animation = &"smoke"
+autoplay = "smoke"
+frame_progress = 0.653539
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
