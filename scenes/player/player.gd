@@ -12,6 +12,7 @@ const JUMP_VELOCITY = -175.0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var jump_max_duration : float = 0.25
 var jump_duration: float = 0.0
+var direction: float = 0.0
 
 func _physics_process(delta):
 	# Add the gravity
@@ -21,14 +22,8 @@ func _physics_process(delta):
 	# Handle jump.
 	handle_jump(delta)
 
-	# Get the input direction and handle the movement/deceleration.
-	var direction = Input.get_axis("left", "right")
-	if direction:
-		velocity.x = direction * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-	
-	switch_direction(direction)
+	# Get the input direction
+	direction = Input.get_axis("left", "right")
 	
 	# Handle action
 	if Input.is_action_just_pressed("action"):
@@ -37,23 +32,12 @@ func _physics_process(delta):
 	move_and_slide()
 	update_movement_animations(direction)
 	
-func update_movement_animations(direction):
-	if is_on_floor():
-		if direction != 0:
-			ap.play("run", -1, 1.75)
-		else:
-			ap.play("idle", -1, 0.5)
-	else:
+func update_movement_animations(dir):
+	if !is_on_floor():
 		if velocity.y < 0:
 			ap.play("jump")
 		else:
 			ap.play("fall")
-
-func switch_direction(direction):
-		if direction != 0:
-			sprite.flip_h = (direction == -1)
-			if direction == -1:
-				sprite.position.x = 0
 
 func handle_jump(delta):
 	if Input.is_action_just_pressed("jump") and is_on_floor():
