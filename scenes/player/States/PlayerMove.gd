@@ -11,19 +11,13 @@ func enter_state():
 
 func update_state(_delta: float):
 	animation_player.play("run")
-	switch_direction(player.direction)
 
 func physics_update_state(_delta: float):
 	if player.direction == 0:
 		state_transition.emit(self, "PlayerIdle")
-	
-	if player.direction:
-		player.velocity.x = player.direction * player.SPEED
-	else:
-		player.velocity.x = move_toward(player.velocity.x, 0, player.SPEED)
-
-func switch_direction(dir):
-		if dir != 0:
-			player.sprite.flip_h = (dir == -1)
-			if dir == -1:
-				player.sprite.position.x = 0
+		
+	if player.velocity.y > 0:
+		state_transition.emit(self, "PlayerFall")
+		
+	if Input.is_action_just_pressed("jump") and player.is_on_floor():
+		state_transition.emit(self, "PlayerJump")
