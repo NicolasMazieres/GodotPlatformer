@@ -21,3 +21,6 @@ func physics_update_state(_delta: float):
 		
 	if Input.is_action_just_pressed("jump") and player.is_on_floor():
 		state_transition.emit(self, "PlayerJump")
+	
+	if Input.is_action_just_pressed("action"):
+		state_transition.emit(self, "PlayerSpell")

@@ -40,7 +40,7 @@ func _physics_process(delta):
 			jump_duration = 0
 		
 		STATE_IDLE:
-			velocity.x = 0
+			velocity.x = move_toward(velocity.x, 0, SPEED)
 			velocity.y = 0
 
 
@@ -59,9 +59,9 @@ func switch_direction(dir):
 		if dir == -1:
 			sprite.position.x = 0
 
-func handle_x_movement(direction: float):
-	if direction:
-		velocity.x = direction * SPEED
+func handle_x_movement(dir: float):
+	if dir:
+		velocity.x = dir * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 	

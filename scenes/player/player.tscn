@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://d0y1m0thbe1eq"]
+[gd_scene load_steps=19 format=3 uid="uid://d0y1m0thbe1eq"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_6f851"]
 [ext_resource type="Texture2D" uid="uid://cw208ilamgq5x" path="res://graphics/characters.png" id="1_j8jpu"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://scenes/player/States/PlayerMove.gd" id="5_p66q7"]
 [ext_resource type="Script" path="res://scenes/player/States/PlayerJump.gd" id="6_lj80i"]
 [ext_resource type="Script" path="res://scenes/player/States/PlayerFall.gd" id="7_iqblj"]
+[ext_resource type="Script" path="res://scenes/player/States/PlayerSpell.gd" id="8_e8gqe"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_205l0"]
 size = Vector2(12, 17)
@@ -112,8 +113,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_nd4j4"]
 resource_name = "spell"
-length = 0.75
-loop_mode = 2
+length = 0.5
 step = 0.25
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -122,10 +122,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [11, 13, 11]
+"values": [13, 11]
 }
 
 [sub_resource type="Animation" id="Animation_ac8nv"]
@@ -194,3 +194,8 @@ script = ExtResource("6_lj80i")
 
 [node name="PlayerFall" type="Node" parent="StateMachine"]
 script = ExtResource("7_iqblj")
+
+[node name="PlayerSpell" type="Node" parent="StateMachine"]
+script = ExtResource("8_e8gqe")
+
+[connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/PlayerSpell" method="_on_animation_player_animation_finished"]

@@ -21,5 +21,7 @@ func physics_update_state(_delta: float):
 
 	if player.velocity.y > 0:
 		state_transition.emit(self, "PlayerFall")
-
+	
+	if Input.is_action_just_pressed("action"):
+		state_transition.emit(self, "PlayerSpell")
 

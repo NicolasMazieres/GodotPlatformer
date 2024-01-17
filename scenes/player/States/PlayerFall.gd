@@ -18,3 +18,6 @@ func physics_update_state(_delta: float):
 			state_transition.emit(self, "PlayerIdle")
 		else:
 			state_transition.emit(self, "PlayerMove")
+	
+	if Input.is_action_just_pressed("action"):
+		state_transition.emit(self, "PlayerSpell")
