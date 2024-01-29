@@ -17,6 +17,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var jump_max_duration : float = 0.25
 var jump_duration: float = 0.0
 var direction: float = 0.0
+var can_spell: bool = true
 
 func _physics_process(delta):
 	# Add the gravity
@@ -45,8 +46,11 @@ func _physics_process(delta):
 
 
 	# Handle action
-	if Input.is_action_just_pressed("action"):
+	if Input.is_action_just_pressed("action") and can_spell:
+		can_spell = false
+		$SpellCooldown.start()
 		action_pressed.emit($SpellStartPosition.global_position, sprite.flip_h)
+		
 	
 	handle_x_movement(direction)
 	move_and_slide()
@@ -65,3 +69,7 @@ func handle_x_movement(dir: float):
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 	
+
+
+func _on_spell_cooldown_timeout():
+	can_spell = true

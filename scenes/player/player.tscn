@@ -198,4 +198,7 @@ script = ExtResource("7_iqblj")
 [node name="PlayerSpell" type="Node" parent="StateMachine"]
 script = ExtResource("8_e8gqe")
 
+[node name="SpellCooldown" type="Timer" parent="."]
+
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/PlayerSpell" method="_on_animation_player_animation_finished"]
+[connection signal="timeout" from="SpellCooldown" to="." method="_on_spell_cooldown_timeout"]
