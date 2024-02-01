@@ -5,12 +5,11 @@ var animation_player: AnimationPlayer
 var player: CharacterBody2D
 
 func enter_state():
-	print("Idle State")
 	player = $"../.."
 	animation_player = $"../../AnimationPlayer"
 
 func update_state(_delta: float):
-	animation_player.play("idle")
+	animation_player.play("idle",-1,0.75)
 
 func physics_update_state(_delta: float):
 	if player.direction != 0:

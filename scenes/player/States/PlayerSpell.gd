@@ -6,7 +6,6 @@ var player: CharacterBody2D
 var is_animation_finished: bool
 
 func enter_state():
-	print("Spell State")
 	player = $"../.."
 	animation_player = $"../../AnimationPlayer"
 	is_animation_finished = false
@@ -30,5 +29,4 @@ func physics_update_state(_delta: float):
 
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "spell":
-		print("spell anim over")
 		is_animation_finished = true

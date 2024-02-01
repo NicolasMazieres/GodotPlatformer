@@ -53,6 +53,7 @@ action={
 2d_render/layer_2="Enemies"
 2d_render/layer_3="Floor"
 2d_render/layer_4="Items & zones"
+2d_render/layer_5="Spells"
 2d_physics/layer_1="Player"
 2d_physics/layer_2="Enemies"
 2d_physics/layer_3="Floor"

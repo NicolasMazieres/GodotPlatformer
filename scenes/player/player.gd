@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 signal action_pressed(position: Vector2, flip: bool)
+signal player_hitted(body: CollisionShape2D)
 
 const SPEED = 100.0
 const JUMP_VELOCITY = -175.0
@@ -11,6 +12,7 @@ const JUMP_VELOCITY = -175.0
 @onready var STATE_MOVE = $StateMachine/PlayerMove
 @onready var STATE_JUMP = $StateMachine/PlayerJump
 @onready var STATE_FALL = $StateMachine/PlayerFall
+@onready var STATE_HITTED = $StateMachine/PlayerHitted
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -18,6 +20,7 @@ var jump_max_duration : float = 0.25
 var jump_duration: float = 0.0
 var direction: float = 0.0
 var can_spell: bool = true
+var recoil_direction: Vector2
 
 func _physics_process(delta):
 	# Add the gravity
@@ -43,12 +46,14 @@ func _physics_process(delta):
 		STATE_IDLE:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 			velocity.y = 0
-
+		
+		STATE_HITTED:
+			direction = recoil_direction.x
 
 	# Handle action
 	if Input.is_action_just_pressed("action") and can_spell:
 		can_spell = false
-		$SpellCooldown.start()
+		$Timers/SpellCooldown.start()
 		action_pressed.emit($SpellStartPosition.global_position, sprite.flip_h)
 		
 	
@@ -70,6 +75,10 @@ func handle_x_movement(dir: float):
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 	
 
-
 func _on_spell_cooldown_timeout():
 	can_spell = true
+
+func hit(body):
+	print("player hitted")
+	recoil_direction = (self.position - body.position).normalized()
+	player_hitted.emit()

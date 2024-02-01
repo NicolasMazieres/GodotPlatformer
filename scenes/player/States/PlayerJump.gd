@@ -5,7 +5,6 @@ var animation_player: AnimationPlayer
 var player: CharacterBody2D
 
 func enter_state():
-	print("Jump State")
 	player = $"../.."
 	animation_player = $"../../AnimationPlayer"
 

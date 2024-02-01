@@ -35,3 +35,6 @@ func on_child_transition(state, new_state_name):
 	
 	new_state.enter_state()
 	current_state = new_state
+
+func _on_player_player_hitted():
+	on_child_transition(current_state, "PlayerHitted")
