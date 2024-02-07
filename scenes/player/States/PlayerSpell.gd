@@ -21,7 +21,7 @@ func physics_update_state(_delta: float):
 		if not player.is_on_floor():
 			state_transition.emit(self, "PlayerFall")
 		else:
-			if player.direction == 0:
+			if player.direction.x == 0:
 				state_transition.emit(self, "PlayerIdle")
 			else:
 				state_transition.emit(self, "PlayerMove")

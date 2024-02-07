@@ -12,7 +12,7 @@ func update_state(_delta: float):
 	animation_player.play("idle",-1,0.75)
 
 func physics_update_state(_delta: float):
-	if player.direction != 0:
+	if player.direction.x != 0:
 		state_transition.emit(self, "PlayerMove")
 	
 	if Input.is_action_just_pressed("jump") and player.is_on_floor():

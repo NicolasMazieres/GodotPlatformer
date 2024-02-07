@@ -12,7 +12,7 @@ func update_state(_delta: float):
 	animation_player.play("run")
 
 func physics_update_state(_delta: float):
-	if player.direction == 0:
+	if player.direction.x == 0:
 		state_transition.emit(self, "PlayerIdle")
 		
 	if player.velocity.y > 0:
