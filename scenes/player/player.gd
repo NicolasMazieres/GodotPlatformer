@@ -22,6 +22,7 @@ var jump_duration: float = 0.0
 var direction: Vector2 = Vector2.ZERO
 var can_spell: bool = true
 var recoil_direction: Vector2
+var input_queue: Array = [null]
 
 func _physics_process(delta):
 	# Add the gravity
@@ -29,7 +30,7 @@ func _physics_process(delta):
 		velocity.y += gravity * delta
 
 	# Get the input direction
-	direction.x = Input.get_axis("left", "right")
+	direction.x = handle_input_movement().x
 
 	match state_machine.current_state:
 		STATE_MOVE:
@@ -65,11 +66,21 @@ func _physics_process(delta):
 			var hit_recoil: Vector2 = Vector2(15, -5) * $Timers/InvulnerabilityTimer.time_left
 			hit_recoil.x *= recoil_direction.x
 			velocity = hit_recoil * SPEED
-			print(velocity)
 		
 	move_and_slide()
 	switch_direction(direction.x)
 		
+
+func handle_input_movement() -> Vector2:
+	for input in ["left", "right"]:
+		if Input.is_action_just_pressed(input):
+			input_queue.push_back(input)
+		if Input.is_action_just_released(input):
+			input_queue.erase(input)
+	match input_queue.back():
+		"left": return Vector2.LEFT
+		"right": return Vector2.RIGHT
+		_ : return Vector2.ZERO
 
 func switch_direction(dir: float):
 	if dir != 0:

@@ -13,7 +13,7 @@ func enter_state():
 	$"../../Sprite2D".material.set_shader_parameter("progress",0.8)
 
 func update_state(_delta: float):
-	animation_player.play("RESET") #hit animation to add
+	animation_player.play("hit")
 
 func physics_update_state(_delta: float):
 	pass

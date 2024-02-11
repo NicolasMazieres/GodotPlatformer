@@ -1,8 +1,8 @@
-[gd_scene load_steps=22 format=3 uid="uid://d0y1m0thbe1eq"]
+[gd_scene load_steps=21 format=3 uid="uid://d0y1m0thbe1eq"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_6f851"]
-[ext_resource type="Texture2D" uid="uid://cw208ilamgq5x" path="res://graphics/characters.png" id="1_j8jpu"]
 [ext_resource type="Shader" path="res://shaders/hurt_effect.gdshader" id="2_nj28f"]
+[ext_resource type="Texture2D" uid="uid://lirq7pk230o6" path="res://graphics/Player/spritesheets/p2_spritesheet.png" id="3_70rwa"]
 [ext_resource type="Script" path="res://Scripts/States/StateMachine.gd" id="3_hrfrk"]
 [ext_resource type="Script" path="res://scenes/player/States/PlayerIdle.gd" id="4_x6fxf"]
 [ext_resource type="Script" path="res://scenes/player/States/PlayerMove.gd" id="5_p66q7"]
@@ -11,13 +11,14 @@
 [ext_resource type="Script" path="res://scenes/player/States/PlayerSpell.gd" id="8_e8gqe"]
 [ext_resource type="Script" path="res://scenes/player/States/PlayerHurt.gd" id="9_sj7ym"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_205l0"]
-size = Vector2(12, 17)
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tjg4t"]
 shader = ExtResource("2_nj28f")
 shader_parameter/color = Color(0.882353, 0.682353, 0.592157, 1)
 shader_parameter/progress = 0.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6w0vr"]
+radius = 5.0
+height = 21.0
 
 [sub_resource type="Animation" id="Animation_p3d3y"]
 length = 0.001
@@ -36,7 +37,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_mnwkc"]
 resource_name = "fall"
-step = 0.5
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -47,12 +48,13 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [6, 7]
+"values": [3, 4]
 }
 
 [sub_resource type="Animation" id="Animation_b6vyk"]
 resource_name = "hit"
-length = 0.75
+length = 0.2
+loop_mode = 1
 step = 0.25
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -61,16 +63,16 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [8, 9, 8]
+"values": [6]
 }
 
 [sub_resource type="Animation" id="Animation_npjqh"]
 resource_name = "idle"
+length = 2.0
 loop_mode = 1
-step = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -78,16 +80,15 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [0, 4]
+"values": [10, 11]
 }
 
 [sub_resource type="Animation" id="Animation_q4wiv"]
 resource_name = "jump"
 loop_mode = 1
-step = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -95,16 +96,16 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0, 0.7),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [4, 5]
+"values": [13, 13]
 }
 
 [sub_resource type="Animation" id="Animation_gbiru"]
 resource_name = "run"
+length = 1.2
 loop_mode = 1
-step = 0.25
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -112,16 +113,15 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [14, 15, 16, 17]
+"values": [0, 1, 2, 7, 8, 9, 3, 4, 10, 5, 11]
 }
 
 [sub_resource type="Animation" id="Animation_nd4j4"]
 resource_name = "spell"
 length = 0.5
-step = 0.25
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -129,27 +129,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25),
+"times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [13, 11]
-}
-
-[sub_resource type="Animation" id="Animation_ac8nv"]
-resource_name = "walk"
-loop_mode = 1
-step = 0.25
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fusxw"]
@@ -160,25 +143,23 @@ _data = {
 "idle": SubResource("Animation_npjqh"),
 "jump": SubResource("Animation_q4wiv"),
 "run": SubResource("Animation_gbiru"),
-"spell": SubResource("Animation_nd4j4"),
-"walk": SubResource("Animation_ac8nv")
+"spell": SubResource("Animation_nd4j4")
 }
 
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 15
 script = ExtResource("1_6f851")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -0.5)
-shape = SubResource("RectangleShape2D_205l0")
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_tjg4t")
-position = Vector2(-1, -2)
-texture = ExtResource("1_j8jpu")
-hframes = 23
-region_enabled = true
-region_rect = Rect2(-0.42432, 38.7249, 736.302, 29.5416)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_70rwa")
+hframes = 7
+vframes = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
+shape = SubResource("CapsuleShape2D_6w0vr")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -186,7 +167,7 @@ libraries = {
 }
 
 [node name="SpellStartPosition" type="Marker2D" parent="."]
-position = Vector2(23, -2)
+position = Vector2(22, 0)
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("3_hrfrk")
