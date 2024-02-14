@@ -31,14 +31,15 @@ func _physics_process(delta):
 	
 	velocity.x = direction * SPEED
 	switch_direction(direction)
-	$AnimationPlayer.play("move")
 	move_and_slide()
 	current_position_x += position.x - old_position_x
 
 func switch_direction(dir):
-	$Sprite2D.flip_h = (dir == -1)
+	$AnimatedSprite2D.flip_h = (dir == 1)
 
 func hit():
+	$AnimatedSprite2D.material.set_shader_parameter("progress",0.8)
+	$InvulnerabilityTimer.start()
 	hit_counter += 1
 	if hit_counter >= MAX_HITS:
 		queue_free()
@@ -46,3 +47,7 @@ func hit():
 func _on_hitbox_body_entered(body):
 	if "hit" in body:
 		body.hit(self)
+
+
+func _on_invulnerability_timer_timeout():
+	$AnimatedSprite2D.material.set_shader_parameter("progress",0.0)

@@ -3,8 +3,8 @@ extends CharacterBody2D
 signal action_pressed(position: Vector2, flip: bool)
 signal player_hurt()
 
-const SPEED = 100.0
-const JUMP_VELOCITY = -175.0
+const SPEED = 200.0
+const JUMP_VELOCITY = -300.0
 
 @onready var state_machine = $StateMachine
 @onready var sprite = $Sprite2D
@@ -17,7 +17,7 @@ const JUMP_VELOCITY = -175.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-var jump_max_duration : float = 0.25
+var jump_max_duration : float = 0.15
 var jump_duration: float = 0.0
 var direction: Vector2 = Vector2.ZERO
 var can_spell: bool = true
@@ -42,7 +42,7 @@ func _physics_process(delta):
 			if Input.is_action_pressed("jump") and not is_on_floor():
 				jump_duration += delta
 			if jump_duration < jump_max_duration:
-				velocity.y += - gravity * delta * 1.05
+				velocity.y += - gravity * delta * 1.025
 			if Input.is_action_just_released("jump") and not is_on_floor():
 				jump_duration = jump_max_duration
 		
