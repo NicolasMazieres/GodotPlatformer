@@ -17,7 +17,7 @@ const JUMP_VELOCITY = -300.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-var jump_max_duration : float = 0.15
+var jump_max_duration : float = 0.2
 var jump_duration: float = 0.0
 var direction: Vector2 = Vector2.ZERO
 var can_spell: bool = true
