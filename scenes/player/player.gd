@@ -99,6 +99,7 @@ func _on_spell_cooldown_timeout():
 	can_spell = true
 
 func hit(body):
+	Globals.player_health -= body.DAMAGE
 	recoil_direction = (self.position - body.position).normalized()
 	if recoil_direction.x >=0:
 		recoil_direction.x = 1.0

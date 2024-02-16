@@ -15,6 +15,10 @@ run/main_scene="res://scenes/levels/level_parent.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
 config/icon="res://graphics/icon.svg"
 
+[autoload]
+
+Globals="*res://Scripts/globals.gd"
+
 [display]
 
 window/size/viewport_width=1280

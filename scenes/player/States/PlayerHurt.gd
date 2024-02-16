@@ -20,6 +20,7 @@ func physics_update_state(_delta: float):
 
 func _on_invulnerability_timer_timeout():
 	$"../../Sprite2D".material.set_shader_parameter("progress",0.0)
+	Globals.is_player_vulnerable = true
 	if player.is_on_floor():
 		state_transition.emit(self, "PlayerIdle")
 	else:

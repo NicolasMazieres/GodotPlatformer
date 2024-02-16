@@ -3,6 +3,7 @@ extends CharacterBody2D
 const SPEED: float = 50.0
 const WALK_RANGE: float = 30.0
 const MAX_HITS: int = 2
+const DAMAGE: float = 2.0
 
 var current_position_x: float = 0
 var direction: float = 1

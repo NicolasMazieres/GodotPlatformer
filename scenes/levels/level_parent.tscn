@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://b2oat3gavv0a4"]
+[gd_scene load_steps=9 format=3 uid="uid://b2oat3gavv0a4"]
 
 [ext_resource type="PackedScene" uid="uid://d0y1m0thbe1eq" path="res://scenes/player/player.tscn" id="1_iwcbf"]
 [ext_resource type="Script" path="res://scenes/levels/level_parent.gd" id="1_k6usp"]
 [ext_resource type="PackedScene" uid="uid://226kmm73qsy3" path="res://scenes/backgrounds/background.tscn" id="2_rbqf8"]
 [ext_resource type="Texture2D" uid="uid://b5cuef3t0i7b3" path="res://graphics/Tiles/tiles_spritesheet.png" id="2_w7t5k"]
 [ext_resource type="PackedScene" uid="uid://du7hwuao38k1w" path="res://scenes/enemies/base_enemy.tscn" id="4_gjkj0"]
+[ext_resource type="PackedScene" uid="uid://crjtlstjl7qgk" path="res://scenes/user_interface/ingame_ui.tscn" id="6_ndg1h"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_t87cr"]
 texture = ExtResource("2_w7t5k")
@@ -631,5 +632,7 @@ position = Vector2(381, 326)
 zoom = Vector2(1.8, 1.8)
 position_smoothing_enabled = true
 drag_vertical_offset = -1.0
+
+[node name="IngameUI" parent="." instance=ExtResource("6_ndg1h")]
 
 [connection signal="action_pressed" from="Player" to="." method="_on_player_action_pressed"]
