@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b2oat3gavv0a4"]
+[gd_scene load_steps=9 format=3 uid="uid://b2oat3gavv0a4"]
 
 [ext_resource type="PackedScene" uid="uid://d0y1m0thbe1eq" path="res://scenes/player/player.tscn" id="1_iwcbf"]
 [ext_resource type="Script" path="res://scenes/levels/level_parent.gd" id="1_k6usp"]
@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://b5cuef3t0i7b3" path="res://graphics/Tiles/tiles_spritesheet.png" id="2_w7t5k"]
 [ext_resource type="PackedScene" uid="uid://du7hwuao38k1w" path="res://scenes/enemies/base_enemy.tscn" id="4_gjkj0"]
 [ext_resource type="PackedScene" uid="uid://crjtlstjl7qgk" path="res://scenes/user_interface/ingame_ui.tscn" id="6_ndg1h"]
-[ext_resource type="PackedScene" uid="uid://d1w4pxss3w8c" path="res://scenes/items/drop_item.tscn" id="7_7c6uv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_t87cr"]
 texture = ExtResource("2_w7t5k")
@@ -623,9 +622,6 @@ layer_0/tile_data = PackedInt32Array(327680, 524289, 12, 393216, 524289, 12, 458
 
 [node name="Items" type="Node2D" parent="."]
 
-[node name="DropItem" parent="Items" instance=ExtResource("7_7c6uv")]
-position = Vector2(191, 330)
-
 [node name="Spells" type="Node2D" parent="."]
 
 [node name="Enemies" type="Node2D" parent="."]
@@ -643,4 +639,5 @@ drag_vertical_offset = -1.0
 
 [node name="IngameUI" parent="." instance=ExtResource("6_ndg1h")]
 
+[connection signal="enemy_dead" from="Enemies/BaseEnemy" to="." method="_on_base_enemy_enemy_dead"]
 [connection signal="action_pressed" from="Player" to="." method="_on_player_action_pressed"]

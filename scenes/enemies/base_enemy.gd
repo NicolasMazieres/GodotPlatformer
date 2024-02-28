@@ -1,9 +1,12 @@
 extends CharacterBody2D
 
+signal enemy_dead(position: Vector2, drop_quantity: int)
+
 const SPEED: float = 50.0
 const WALK_RANGE: float = 30.0
 const MAX_HITS: int = 2
 const DAMAGE: float = 2.0
+const DROP_QUANTITY: int = 5
 
 var current_position_x: float = 0
 var direction: float = 1
@@ -43,6 +46,7 @@ func hit():
 	$InvulnerabilityTimer.start()
 	hit_counter += 1
 	if hit_counter >= MAX_HITS:
+		enemy_dead.emit($DropPosition.global_position, DROP_QUANTITY)
 		queue_free()
 
 func _on_hitbox_body_entered(body):
