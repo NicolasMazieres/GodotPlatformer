@@ -17,6 +17,9 @@ func physics_update_state(_delta: float):
 			state_transition.emit(self, "PlayerIdle")
 		else:
 			state_transition.emit(self, "PlayerMove")
+	else:
+		if not player.is_jumping and player.coyote_timer < player.COYOTE_TIME and Input.is_action_just_pressed("jump"):
+			state_transition.emit(self, "PlayerJump")
 	
 	if Input.is_action_just_pressed("action"):
 		state_transition.emit(self, "PlayerSpell")

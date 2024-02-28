@@ -5,6 +5,7 @@ signal player_hurt()
 
 const SPEED = 200.0
 const JUMP_VELOCITY = -300.0
+const COYOTE_TIME = 0.15
 
 @onready var state_machine = $StateMachine
 @onready var sprite = $Sprite2D
@@ -23,11 +24,17 @@ var direction: Vector2 = Vector2.ZERO
 var can_spell: bool = true
 var recoil_direction: Vector2
 var input_queue: Array = [null]
-
+var is_jumping: bool = false
+var coyote_timer: float = 0
+	
 func _physics_process(delta):
 	# Add the gravity
 	if not is_on_floor():
 		velocity.y += gravity * delta
+	
+	# Update Coyote jump timer
+	if not is_jumping and not is_on_floor():
+		coyote_timer += delta
 
 	# Get the input direction
 	direction.x = handle_input_movement().x

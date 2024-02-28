@@ -7,6 +7,8 @@ var player: CharacterBody2D
 func enter_state():
 	player = $"../.."
 	animation_player = $"../../AnimationPlayer"
+	player.is_jumping = false
+	player.coyote_timer = 0
 
 func update_state(_delta: float):
 	animation_player.play("idle",-1,0.75)

@@ -7,6 +7,7 @@ var player: CharacterBody2D
 func enter_state():
 	player = $"../.."
 	animation_player = $"../../AnimationPlayer"
+	player.is_jumping = true
 
 func update_state(_delta: float):
 	animation_player.play("jump")
