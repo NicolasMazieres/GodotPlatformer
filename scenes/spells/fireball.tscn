@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://c1bq6h0q8yv64"]
+
+[ext_resource type="PackedScene" uid="uid://bfue4apnd6qxo" path="res://scenes/spells/spell.tscn" id="1_car17"]
+[ext_resource type="Script" path="res://scenes/spells/fireball.gd" id="2_5e4p0"]
+[ext_resource type="Texture2D" uid="uid://ova3y23l3qos" path="res://graphics/addons/kenney_particle_pack/muzzle_02.png" id="3_xt2fu"]
+
+[node name="Fireball" instance=ExtResource("1_car17")]
+script = ExtResource("2_5e4p0")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Sprite2D" index="0"]
+self_modulate = Color(0.835294, 0.278431, 0, 1)
+position = Vector2(-2.84217e-14, 1.35525e-20)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("3_xt2fu")
+region_enabled = true
+region_rect = Rect2(143.258, 142.314, 220.646, 365.586)
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D/Sprite2D2" index="0"]
+self_modulate = Color(0.760784, 0.631373, 0.027451, 1)
+position = Vector2(1.13687e-13, -1.90735e-06)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("3_xt2fu")
+region_enabled = true
+region_rect = Rect2(143.258, 142.314, 220.646, 365.586)

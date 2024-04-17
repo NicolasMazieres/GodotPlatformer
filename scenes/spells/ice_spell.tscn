@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://b0ikjvjpwtclj"]
+
+[ext_resource type="PackedScene" uid="uid://bfue4apnd6qxo" path="res://scenes/spells/spell.tscn" id="1_uqppv"]
+[ext_resource type="Script" path="res://scenes/spells/ice_spell.gd" id="2_xd0ah"]
+
+[node name="IceSpell" instance=ExtResource("1_uqppv")]
+script = ExtResource("2_xd0ah")

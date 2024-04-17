@@ -1,39 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://bfue4apnd6qxo"]
+[gd_scene load_steps=4 format=3 uid="uid://bfue4apnd6qxo"]
 
-[ext_resource type="Texture2D" uid="uid://dwqjigsej47ku" path="res://graphics/addons/kenney_particle_pack/fire_01.png" id="1_0jnlh"]
 [ext_resource type="Script" path="res://scenes/spells/spell.gd" id="1_oqbwp"]
-[ext_resource type="Texture2D" uid="uid://c08ebghcd0lw" path="res://graphics/addons/kenney_particle_pack/smoke_01.png" id="2_3fk6q"]
-[ext_resource type="Texture2D" uid="uid://b81yrp84l1ap2" path="res://graphics/addons/kenney_particle_pack/fire_02.png" id="2_5hf33"]
-[ext_resource type="Texture2D" uid="uid://c471odqcpdj1k" path="res://graphics/addons/kenney_particle_pack/smoke_02.png" id="6_xldp2"]
+[ext_resource type="Texture2D" uid="uid://ova3y23l3qos" path="res://graphics/addons/kenney_particle_pack/muzzle_02.png" id="2_7f6gr"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7e5j8"]
-radius = 7.0
-height = 24.0
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_qk8dx"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("1_0jnlh")
-}, {
-"duration": 1.0,
-"texture": ExtResource("2_5hf33")
-}],
-"loop": true,
-"name": &"fire",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_3fk6q")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_xldp2")
-}],
-"loop": true,
-"name": &"smoke",
-"speed": 5.0
-}]
+radius = 8.0
+height = 26.0
 
 [node name="Spell" type="Area2D"]
 collision_layer = 16
@@ -44,38 +16,14 @@ script = ExtResource("1_oqbwp")
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_7e5j8")
 
-[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="."]
-modulate = Color(1, 0.317647, 0.137255, 1)
-scale = Vector2(0.1, 0.05)
-sprite_frames = SubResource("SpriteFrames_qk8dx")
-animation = &"smoke"
-autoplay = "fire"
-frame_progress = 0.545422
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-modulate = Color(0.733333, 0.14902, 0.101961, 1)
-scale = Vector2(0.1, 0.05)
-sprite_frames = SubResource("SpriteFrames_qk8dx")
-animation = &"fire"
-autoplay = "fire"
-frame_progress = 0.0635106
-
-[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
-modulate = Color(0.945098, 0.705882, 0.12549, 1)
-scale = Vector2(0.1, 0.05)
-sprite_frames = SubResource("SpriteFrames_qk8dx")
-animation = &"fire"
-autoplay = "fire"
-frame_progress = 0.787092
-
-[node name="AnimatedSprite2D4" type="AnimatedSprite2D" parent="."]
-modulate = Color(0.780392, 0.117647, 0, 1)
-position = Vector2(9.53674e-07, -2.38419e-07)
-scale = Vector2(0.08, 0.04)
-sprite_frames = SubResource("SpriteFrames_qk8dx")
-animation = &"smoke"
-autoplay = "smoke"
-frame_progress = 0.653539
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(0.894118, 0, 0.133333, 1)
+position = Vector2(-2.84217e-14, 6.77626e-21)
+rotation = -1.5708
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("2_7f6gr")
+region_enabled = true
+region_rect = Rect2(143.258, 142.314, 220.646, 365.586)
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true

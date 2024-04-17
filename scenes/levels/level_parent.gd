@@ -1,6 +1,6 @@
 extends Node2D
 
-var spell_scene = preload("res://scenes/spells/spell.tscn")
+var spell_scene = preload("res://scenes/spells/fireball.tscn")
 var drop_item_scene = preload("res://scenes/items/drop_item.tscn")
 
 func _on_player_action_pressed(pos, flip):
