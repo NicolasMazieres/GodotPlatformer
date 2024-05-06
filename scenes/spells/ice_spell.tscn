@@ -1,7 +1,68 @@
-[gd_scene load_steps=3 format=3 uid="uid://b0ikjvjpwtclj"]
+[gd_scene load_steps=9 format=3 uid="uid://b0ikjvjpwtclj"]
 
 [ext_resource type="PackedScene" uid="uid://bfue4apnd6qxo" path="res://scenes/spells/spell.tscn" id="1_uqppv"]
 [ext_resource type="Script" path="res://scenes/spells/ice_spell.gd" id="2_xd0ah"]
+[ext_resource type="Texture2D" uid="uid://bp468xd6qhrni" path="res://graphics/addons/kenney_particle_pack/flare_01.png" id="3_a21qk"]
+[ext_resource type="Shader" path="res://shaders/img_cleaner.gdshader" id="3_j51d2"]
+[ext_resource type="Texture2D" uid="uid://c5771mgfi1cly" path="res://graphics/addons/kenney_particle_pack/circle_05.png" id="3_suwia"]
+
+[sub_resource type="Shader" id="Shader_bvvrl"]
+code = "shader_type canvas_item;
+
+void fragment() {
+	// Called for every pixel the material is visible on.
+	vec4 current_texture = texture(TEXTURE, UV);
+	float current_alpha = current_texture.a; // Read from texture
+	
+	if (current_alpha <= 0.15){
+		COLOR.a = 0.0;
+	}
+}
+
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tk56t"]
+shader = SubResource("Shader_bvvrl")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wl8ek"]
+shader = ExtResource("3_j51d2")
 
 [node name="IceSpell" instance=ExtResource("1_uqppv")]
 script = ExtResource("2_xd0ah")
+
+[node name="Sprite2D" parent="." index="1"]
+self_modulate = Color(0.0156863, 0.415686, 0.894118, 1)
+material = SubResource("ShaderMaterial_tk56t")
+rotation = 0.0
+scale = Vector2(0.125, 0.125)
+texture = ExtResource("3_suwia")
+region_rect = Rect2(89.22, 88.43, 332.78, 336.38)
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D" index="0"]
+self_modulate = Color(0.301961, 0.74902, 0.894118, 1)
+material = SubResource("ShaderMaterial_wl8ek")
+position = Vector2(-2.84217e-14, 6.77626e-21)
+scale = Vector2(3, 3)
+texture = ExtResource("3_a21qk")
+region_enabled = true
+region_rect = Rect2(209.558, 231.445, 92.8841, 49.5541)
+
+[node name="Sprite2D2" type="Sprite2D" parent="Sprite2D" index="1"]
+self_modulate = Color(0.301961, 0.74902, 0.894118, 1)
+material = SubResource("ShaderMaterial_wl8ek")
+position = Vector2(-2.84217e-14, 6.77626e-21)
+rotation = 1.0472
+scale = Vector2(3, 3)
+texture = ExtResource("3_a21qk")
+region_enabled = true
+region_rect = Rect2(209.558, 231.445, 92.8841, 49.5541)
+
+[node name="Sprite2D3" type="Sprite2D" parent="Sprite2D" index="2"]
+self_modulate = Color(0.301961, 0.74902, 0.894118, 1)
+material = SubResource("ShaderMaterial_wl8ek")
+position = Vector2(-2.84217e-14, 6.77626e-21)
+rotation = 2.0944
+scale = Vector2(3, 3)
+texture = ExtResource("3_a21qk")
+region_enabled = true
+region_rect = Rect2(209.558, 231.445, 92.8841, 49.5541)

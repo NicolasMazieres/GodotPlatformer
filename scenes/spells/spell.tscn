@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://ova3y23l3qos" path="res://graphics/addons/kenney_particle_pack/muzzle_02.png" id="2_7f6gr"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7e5j8"]
-radius = 8.0
-height = 26.0
+radius = 6.0
+height = 14.0
 
 [node name="Spell" type="Area2D"]
 collision_layer = 16
