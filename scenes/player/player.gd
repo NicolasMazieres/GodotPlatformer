@@ -100,7 +100,6 @@ func handle_x_movement(dir: Vector2):
 		velocity.x = dir.x * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
-	
 
 func _on_spell_cooldown_timeout():
 	can_spell = true
