@@ -1,9 +1,10 @@
 extends Node2D
 
-var spell_scene = preload("res://scenes/spells/ice_spell.tscn")
+var spell_scene = Globals.active_spell
 var drop_item_scene = preload("res://scenes/items/drop_item.tscn")
 
 func _on_player_action_pressed(pos, flip):
+	spell_scene = Globals.active_spell
 	var spell = spell_scene.instantiate() as Area2D
 	spell.position = pos
 	if flip:

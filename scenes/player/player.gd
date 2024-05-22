@@ -38,6 +38,9 @@ func _physics_process(delta):
 
 	# Get the input direction
 	direction.x = handle_input_movement().x
+	
+	if Input.is_action_just_pressed("down"):
+		switch_active_spell()
 
 	match state_machine.current_state:
 		STATE_MOVE:
@@ -113,4 +116,12 @@ func hit(body):
 		recoil_direction.x = -1.0
 	
 	player_hurt.emit()
-	
+
+func switch_active_spell():
+	var current_spell_index = Globals.SPELLS_LIST.find(Globals.active_spell,0)
+	print(current_spell_index)
+	print(Globals.SPELLS_LIST.size())
+	if current_spell_index + 1 >= Globals.SPELLS_LIST.size():
+		Globals.active_spell = Globals.SPELLS_LIST[0]
+	else:
+		Globals.active_spell = Globals.SPELLS_LIST[current_spell_index + 1]

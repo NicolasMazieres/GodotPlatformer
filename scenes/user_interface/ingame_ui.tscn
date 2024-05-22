@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://crjtlstjl7qgk"]
+[gd_scene load_steps=5 format=3 uid="uid://crjtlstjl7qgk"]
 
 [ext_resource type="Script" path="res://scenes/user_interface/ingame_ui.gd" id="1_xmqk7"]
+[ext_resource type="Texture2D" uid="uid://c1oe0tj00w7hv" path="res://graphics/Items/fireball.png" id="2_7lo30"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qq5wv"]
 bg_color = Color(0.273873, 0.273873, 0.273873, 1)
@@ -50,3 +51,37 @@ theme_override_styles/background = SubResource("StyleBoxFlat_qq5wv")
 theme_override_styles/fill = SubResource("StyleBoxFlat_071u3")
 max_value = 10.0
 show_percentage = false
+
+[node name="ActiveSpell" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="ActiveSpell"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -90.0
+offset_right = 90.0
+grow_vertical = 0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="ColorRect" type="ColorRect" parent="ActiveSpell/MarginContainer"]
+layout_mode = 2
+color = Color(0.921569, 0.921569, 0.921569, 0.862745)
+
+[node name="SpellLogo" type="TextureRect" parent="ActiveSpell/MarginContainer"]
+layout_mode = 2
+texture = ExtResource("2_7lo30")
+
+[node name="ReferenceRect" type="ReferenceRect" parent="ActiveSpell/MarginContainer"]
+layout_mode = 2
+border_color = Color(0, 0, 0, 1)
+border_width = 2.0
+editor_only = false
