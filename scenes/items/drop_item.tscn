@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://d1w4pxss3w8c"]
+[gd_scene load_steps=7 format=3 uid="uid://d1w4pxss3w8c"]
 
 [ext_resource type="Texture2D" uid="uid://c5771mgfi1cly" path="res://graphics/addons/kenney_particle_pack/circle_05.png" id="1_h5atw"]
 [ext_resource type="Script" path="res://scenes/items/drop_item.gd" id="1_yxlcm"]
@@ -6,12 +6,35 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_mop4r"]
 radius = 6.0
 
+[sub_resource type="Shader" id="Shader_7wf0a"]
+code = "shader_type canvas_item;
+
+void fragment() {
+	// Called for every pixel the material is visible on.
+	vec4 current_texture = texture(TEXTURE, UV);
+	float current_alpha = current_texture.a; // Read from texture
+	
+	if (current_alpha >= 0.4){
+		COLOR = vec4(0.85,0.85,0.0, 1.0);
+	}
+	else if (current_alpha < 0.4){
+		float new_a = max(0.0, current_alpha-0.1);
+		COLOR.a = new_a;
+	}
+}
+
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mcyya"]
+shader = SubResource("Shader_7wf0a")
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_hrumn"]
 radius = 12.0
 
 [node name="DropItem" type="CharacterBody2D"]
 light_mask = 8
 visibility_layer = 5
+scale = Vector2(0.75, 0.75)
 collision_layer = 16
 collision_mask = 5
 script = ExtResource("1_yxlcm")
@@ -24,10 +47,12 @@ shape = SubResource("CircleShape2D_mop4r")
 collision_layer = 8
 
 [node name="Circle05" type="Sprite2D" parent="Area2D"]
+material = SubResource("ShaderMaterial_mcyya")
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("1_h5atw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
 shape = SubResource("CircleShape2D_hrumn")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

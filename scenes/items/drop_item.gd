@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+const ITEM_VALUE: float = 1.0
+
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var rotation_speed: int = 40
 var initial_speed: int = randi_range(100,150)
@@ -17,4 +19,5 @@ func _physics_process(delta):
 		move_and_slide()
 
 func _on_area_2d_body_entered(_body):
+	Globals.collectible_value += ITEM_VALUE
 	queue_free()
