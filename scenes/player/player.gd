@@ -27,6 +27,9 @@ var input_queue: Array = [null]
 var is_jumping: bool = false
 var coyote_timer: float = 0
 	
+func _ready():
+	state_machine.current_state = STATE_IDLE
+
 func _physics_process(delta):
 	# Add the gravity
 	if not is_on_floor():
@@ -114,7 +117,6 @@ func hit(body):
 		recoil_direction.x = 1.0
 	else:
 		recoil_direction.x = -1.0
-	
 	player_hurt.emit()
 
 func switch_active_spell():

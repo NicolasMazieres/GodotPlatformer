@@ -1,14 +1,17 @@
 extends Node
 
 signal player_health_change
+signal player_dead
 signal active_spell_change
 signal collectible_value_change
 
 const PLAYER_MAX_HEALTH: float = 10.0
 const MAX_COLLECTIBLE: float = 100.0
 const SPELLS_LIST = [preload("res://scenes/spells/fireball.tscn"),preload("res://scenes/spells/ice_spell.tscn")]
+const INITIAL_LOCATION: Vector2 = Vector2(250, 390)
 
 var is_player_vulnerable: bool = true
+var last_saved_location: Vector2 = INITIAL_LOCATION
 
 var player_health: float = PLAYER_MAX_HEALTH:
 	get:
@@ -21,6 +24,8 @@ var player_health: float = PLAYER_MAX_HEALTH:
 				player_health = value
 				is_player_vulnerable = false
 		player_health_change.emit()
+		if player_health == 0:
+			player_dead.emit()
 
 var active_spell = SPELLS_LIST[0]:
 	get:

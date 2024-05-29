@@ -9,6 +9,7 @@ func enter_state():
 	animation_player = $"../../AnimationPlayer"
 	player.is_jumping = false
 	player.coyote_timer = 0
+	$"../../Sprite2D".material.set_shader_parameter("progress",0.0)
 
 func update_state(_delta: float):
 	animation_player.play("idle",-1,0.75)
